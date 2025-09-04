@@ -1,0 +1,40 @@
+ {% extends "base.html" %}
+
+{% block title %}Logout{% endblock %}
+
+{% block content %}
+<div class="text-center mb-3">
+    <h1>Logout</h1>
+    <p>You are about to log out from your account</p>
+</div>
+
+<div class="card" style="max-width: 400px; margin: 0 auto;">
+    <form id="logoutForm">
+        <button type="submit" class="btn" style="width: 100%; background-color: #d9534f; color: #fff;">
+            Logout
+        </button>
+    </form>
+
+    <div class="text-center mt-3">
+        <p><a href="/" style="color: #000000; text-decoration: underline;">Back to Home</a></p>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.getElementById('logoutForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // امسح التوكن من التخزين المحلي (لو بتحفظه في localStorage)
+        localStorage.removeItem('access_token');
+
+        showAlert('You have been logged out successfully', 'success');
+
+        // رجّع المستخدم على صفحة الـ login
+        setTimeout(() => {
+            window.location.href = '/login';
+        }, 1500);
+    });
+</script>
+{% endblock %}

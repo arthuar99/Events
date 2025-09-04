@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Event Booking{% endblock %}
+
+{% block content %}
+<div class="text-center mb-3">
+    <h1>Welcome to Event Booking System</h1>
+    <p>Discover upcoming events and book your seat easily</p>
+</div>
+
+<div class="grid grid-3">
+    <div class="card text-center">
+        <i class="fas fa-calendar-alt" style="font-size: 3rem; color: #000; margin-bottom: 1rem;"></i>
+        <h3>Browse Events</h3>
+        <p>Discover a variety of upcoming events</p>
+        <a href="/events" class="btn">Browse Now</a>
+    </div>
+    
+    <div class="card text-center">
+        <i class="fas fa-ticket-alt" style="font-size: 3rem; color: #000; margin-bottom: 1rem;"></i>
+        <h3>Book Your Seat</h3>
+        <p>Choose the perfect seat and book your ticket</p>
+        <a href="/events" class="btn">Book Now</a>
+    </div>
+    
+    <div class="card text-center">
+        <i class="fas fa-qrcode" style="font-size: 3rem; color: #000; margin-bottom: 1rem;"></i>
+        <h3>Digital Tickets</h3>
+        <p>Get digital tickets with QR codes</p>
+        <a href="/bookings" class="btn">View Tickets</a>
+    </div>
+</div>
+
+{% if not current_user %}
+<div class="card text-center mt-3">
+    <h3>Start Your Journey</h3>
+    <p>Create an account or login to access all features</p>
+    <div class="mt-2">
+        <a href="/register" class="btn">Create Account</a>
+        <a href="/login" class="btn btn-secondary">Login</a>
+    </div>
+</div>
+{% endif %}
+
+<div class="card mt-3">
+    <h3>How It Works</h3>
+    <div class="grid grid-2">
+        <div>
+            <h4>1. Browse Events</h4>
+            <p>Browse the list of available events and choose what interests you</p>
+        </div>
+        <div>
+            <h4>2. Choose Your Seat</h4>
+            <p>Select the perfect seat from the interactive map</p>
+        </div>
+        <div>
+            <h4>3. Book Your Ticket</h4>
+            <p>Complete the booking process and get your digital ticket</p>
+        </div>
+        <div>
+            <h4>4. Enjoy the Event</h4>
+            <p>Attend the event and show your ticket at entry</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

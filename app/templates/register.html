@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Create Account{% endblock %}
+
+{% block content %}
+<div class="text-center mb-3">
+    <h1>Create Account</h1>
+    <p>Sign up to access all features</p>
+</div>
+
+<div class="card" style="max-width: 500px; margin: 0 auto;">
+    <form id="registerForm">
+        <div class="form-group">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" id="email" name="email" class="form-input" required>
+        </div>
+
+        <div class="form-group">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" id="username" name="username" class="form-input" required>
+        </div>
+
+        <div class="form-group">
+            <label for="full_name" class="form-label">Full Name</label>
+            <input type="text" id="full_name" name="full_name" class="form-input" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" name="password" class="form-input" required>
+        </div>
+
+        <button type="submit" class="btn" style="width: 100%;">Create Account</button>
+    </form>
+
+    <div class="text-center mt-3">
+        <p>Already have an account? <a href="/login" style="color: #000000; text-decoration: underline;">Login here</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.getElementById('registerForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const formData = {
+            email: document.getElementById('email').value,
+            username: document.getElementById('username').value,
+            full_name: document.getElementById('full_name').value,
+            password: document.getElementById('password').value
+        };
+
+        try {
+            const response = await fetch('/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                showAlert('Account created successfully! You can now login', 'success');
+
+                // Redirect to login page
+                setTimeout(() => {
+                    window.location.href = '/login';
+                }, 2000);
+
+            } else {
+                const errorData = await response.json();
+                showAlert(errorData.detail || 'Failed to create account', 'error');
+            }
+        } catch (error) {
+            showAlert('Connection error occurred', 'error');
+        }
+    });
+</script>
+{% endblock %}
